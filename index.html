@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="keywords" content="chotekaam, paniwala, nalwala, bijliwala, acwala, plumber, electrician, pratapgarh">
+    <title>WhatsApp Form</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			margin: 0;
+			background-color: #f0f0f0;
+		}
+		.container {
+			text-align: center;
+		}
+		#open-form-button {
+			background-color: #25D366;
+			color: white;
+			border: none;
+			padding: 15px 30px;
+			font-size: 18px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+		}
+		#open-form-button:hover {
+			background-color: #1EBE54;
+		}
+		.hidden {
+			display: none;
+		}
+		.form-popup {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.form-popup-content {
+			background-color: white;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+			position: relative;
+			width: 300px;
+			text-align: left;
+		}
+		.close-button {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			font-size: 20px;
+			cursor: pointer;
+		}
+		form label {
+			display: block;
+			margin: 10px 0 5px;
+		}
+		form input, form textarea {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+		}
+		form button {
+			background-color: #25D366;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			border-radius: 5px;
+			transition: background-color 0.3s ease;
+		}
+		form button:hover {
+			background-color: #1EBE54;
+		}
+	</style>
+	
+</head>
+<body>
+    <div class="container">
+        <button id="open-form-button">Open Form</button>
+        <div id="form-popup" class="form-popup hidden">
+            <div class="form-popup-content">
+                <span class="close-button">&times;</span>
+                <form id="contact-form">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" required></textarea>
+                    <button type="submit">Send to WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </div>
+	<script>
+		document.getElementById('open-form-button').addEventListener('click', function() {
+			document.getElementById('form-popup').classList.remove(hidden);
+		});
+
+		document.getElementById('contact-form').addEventListener('submit', function(event) {
+			event.preventDefault(); // Prevent the form from submitting the traditional way
+
+			var phoneNumber = '+919795470533'; // Replace with the target phone number
+			var name = document.getElementById('name').value;
+			var message = document.getElementById('message').value;
+
+			var whatsappMessage = `Name: ${name}\nMessage: ${message}`;
+			var whatsappURL = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(whatsappMessage);
+
+			window.open(whatsappURL, '_blank');
+			document.getElementById('form-popup').classList.add('hidden');
+		});
+	</script>
+</body>
+</html>
